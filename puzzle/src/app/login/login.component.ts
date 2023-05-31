@@ -36,7 +36,7 @@ export class LoginComponent {
     }
     onSubmit() {
         this.arr = [];
-        if (this.emailLogin.valid && this.passwordLogin.valid) {
+        if (this.emailLogin.value === "test@test.at" && this.passwordLogin.value === "12345678") {
             for(let i  in this.LoginForm.value){
                 this.arr.push(this.LoginForm.get(i)?.value);
             }
