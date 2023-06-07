@@ -4,7 +4,7 @@ const cors = require('cors'); //import cors module
 const bodyParser = require('body-parser'); //import body-parser module
 const crypto = require('node:crypto'); //import crypto module
 
-const users = [
+let users = [
     { username: 'test@test.com', password: '12345678', authToken: null, highscore: '78' },
     { username: 'hello@hel.com', password: '12345678', authToken: null, highscore: '8' },
     { username: 'test@test.co', password: '12345678', authToken: null, highscore: '0' }
