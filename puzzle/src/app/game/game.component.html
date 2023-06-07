@@ -1,0 +1,17 @@
+<h1 class="mt-3 d-flex justify-content-center">Game</h1>
+<div class="d-flex justify-content-center">
+<form class="mt-3 example-form" [formGroup]="GameForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill" class="example-full-width">
+        <input matInput type="text" [formControl]="highscore" required
+               name="highscore" formControlName="highscore">
+        <mat-error>{{errorMessageHighscore()}}</mat-error>
+    </mat-form-field>
+    <button mat-raised-button color="primary" class="col-12 mt-3" type="submit">set Highscore</button>
+</form>
+    <div class="mt-3 example-form">
+        <button mat-raised-button color="primary" class="col-12 mt-3" (click)="getHighscore()">get Highscore</button>
+        <span>{{fakeHighscore}}</span>
+
+        <button mat-raised-button color="primary" class="col-12 mt-3" (click)="logout()">logout</button>
+    </div>
+</div>

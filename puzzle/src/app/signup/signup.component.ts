@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormControl, Validators} from "@angular/forms";
+import {HttpClient} from "@angular/common/http";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-signup',
@@ -32,6 +34,10 @@ export class SignupComponent {
         password: this.password,
         confpassword: this.confpassword
     });
+
+
+
+    constructor(private http: HttpClient, private router: Router) {}
 
     errorMessageCompany() {
         if (this.company.hasError('required')) {
@@ -106,10 +112,28 @@ export class SignupComponent {
     onSubmit() {
         this.arr = [];
         this.str = '';
-        if (this.formValid()) {
+        if(this.formValid()) {
             for(let i  in this.LoginForm.value){
                 this.arr.push(this.LoginForm.get(i)?.value);
             }
+
+            let json = {
+                company: this.company.value,
+                street: this.street.value,
+                city: this.city.value,
+                postal: this.postal.value,
+                username : this.email.value,
+                password: this.password.value
+            }
+
+            this.http.post('http://localhost:3000/users', json).subscribe((res: any) => {
+                console.log(res.text);
+                localStorage.setItem('authToken', res.authToken);
+                setTimeout(() => {
+                    this.router.navigate(['/']).then(r => console.log(r));
+                }, 2000);
+            });
+
         } else {
             this.str = 'Please fill out all fields correctly';
         }

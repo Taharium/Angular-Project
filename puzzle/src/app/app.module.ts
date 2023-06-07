@@ -42,18 +42,22 @@ import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTreeModule} from '@angular/material/tree';
 import { SignupComponent } from './signup/signup.component';
+import {HttpClientModule} from "@angular/common/http";
+import { GameComponent } from './game/game.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         LoginComponent,
-        SignupComponent
+        SignupComponent,
+        GameComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
         FormsModule,
+        HttpClientModule,
         ReactiveFormsModule,
         MatAutocompleteModule,
         MatBadgeModule,

@@ -1,7 +1,9 @@
 <mat-toolbar>
     <a class="text-black text-decoration-none" type="button" routerLink="">{{title}}</a>
     <span class="example-spacer"></span>
-    <a mat-raised-button type="button" color="primary" routerLink="/login" class="me-2">Sign-In</a>
-    <a mat-raised-button type="button" color="primary" routerLink="/signup">Sign-Up</a>
+    <a mat-raised-button type="button" color="primary" (click)="login()" class="me-2">Sign-In</a>
+    <a mat-raised-button type="button" color="primary" (click)="signup()" class="me-2">Sign-Up</a>
+    <a mat-raised-button type="button" color="primary" (click)="checkAuthToken()">Game</a>
 </mat-toolbar>
+<h1 class="mt-3 d-flex justify-content-center">{{strApp}}</h1>
 <router-outlet></router-outlet>
