@@ -29,32 +29,47 @@ export class GameComponent {
     getHighscore() {
         const authToken = localStorage.getItem('authToken');
         console.log(authToken);
-        this.http.get('http://localhost:3000/highscores/'+authToken).subscribe((res: any) => {
-            console.log(res.text);
-            this.fakeHighscore = res.highscore;
-            console.log("Highscore successfully retrieved");
+        this.http.get('http://localhost:3000/highscores/'+authToken).subscribe({
+            next:(res: any) => {
+                console.log(res);
+                this.fakeHighscore = res.highscore;
+                //console.log("Highscore successfully retrieved");
+            },
+            error: (err: any) => {
+                console.log(err.error);
+            }
         });
     }
 
     logout() {
         const authToken = localStorage.getItem('authToken');
 
-        this.http.delete('http://localhost:3000/sessions/'+authToken).subscribe((res: any) => {
-            localStorage.removeItem('authToken');
-            console.log(res);
-            this.router.navigate(['/']).then(r => console.log(r));
+        this.http.delete('http://localhost:3000/sessions/'+authToken).subscribe({
+            next: (res: any) => {
+                localStorage.removeItem('authToken');
+                console.log(res);
+                this.router.navigate(['/']).then(r => console.log(r));
+            },
+            error: (err: any) => {
+                console.log(err.error);
+            }
         });
     }
 
     onSubmit() {
+        this.fakeHighscore = '';
         if (this.highscore.valid) {
             const authToken = localStorage.getItem('authToken');
             let json = {
                 highscore : this.highscore.value
             }
-            this.http.post('http://localhost:3000/highscores/'+authToken, json).subscribe((res: any) => {
-                console.log(res.text);
-                console.log("Highscore successfully changed");
+            this.http.post('http://localhost:3000/highscores/'+authToken, json).subscribe({
+                next: (res: any) => {
+                    console.log(res);
+                },
+                error: (err: any) => {
+                    console.log(err.error);
+                }
             });
         } else {
             console.log("Invalid input");

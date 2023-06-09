@@ -126,14 +126,18 @@ export class SignupComponent {
                 password: this.password.value
             }
 
-            this.http.post('http://localhost:3000/users', json).subscribe((res: any) => {
-                console.log(res.text);
-                localStorage.setItem('authToken', res.authToken);
-                setTimeout(() => {
-                    this.router.navigate(['/']).then(r => console.log(r));
-                }, 2000);
+            this.http.post('http://localhost:3000/users', json).subscribe({
+                next: (res: any) => {
+                    console.log(res);
+                    localStorage.setItem('authToken', res.authToken);
+                    setTimeout(() => {
+                        this.router.navigate(['/game']).then(r => console.log(r));
+                    }, 2000);
+                },
+                error: (err: any) => {
+                    console.log(err.error);
+                }
             });
-
         } else {
             this.str = 'Please fill out all fields correctly';
         }

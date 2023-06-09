@@ -54,13 +54,17 @@ export class LoginComponent {
                 password: this.passwordLogin.value
             }
 
-            this.http.post('http://localhost:3000/login', json).subscribe((res: any) => {
-                console.log(res.text);
-                console.log("Login successful");
-                localStorage.setItem('authToken', res.authToken);
-                setTimeout(() => {
-                    this.router.navigate(['/']).then(r => console.log(r));
-                }, 2000);
+            this.http.post('http://localhost:3000/users/'+this.emailLogin.value , json).subscribe({
+                next: (res: any) => {
+                    console.log(res);
+                    localStorage.setItem('authToken', res.authToken);
+                    setTimeout(() => {
+                        this.router.navigate(['/game']).then(r => console.log(r));
+                    }, 2000);
+                },
+                error: (err: any) => {
+                    console.log(err.error);
+                }
             });
 
         } else {
