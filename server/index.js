@@ -4,6 +4,7 @@ const cors = require('cors'); //import cors module
 const bodyParser = require('body-parser'); //import body-parser module
 const crypto = require('node:crypto'); //import crypto module
 const bcrypt = require('bcryptjs'); //import bcrypt module
+const mongoose = require('mongoose'); //import mongoose module
 
 let users = [
     { username: 'test@test.com', password: '$2a$10$.Z5be.XRjDDIbqJfXYPeW.5k.x2LJNPuwmqy6JbiL3FhiImmxgEEu', authToken: null, highscore: '78' },
@@ -13,6 +14,20 @@ let users = [
 
 app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(bodyParser.json());
+
+
+(async function () {
+    try {
+            mongoose.connect('mongodb://localhost:27017/highscore', {
+            useNewUrlParser: true,
+            useUnifiedTopology: true
+        });
+        console.log('Connected to MongoDB');
+    } catch (err) {
+        console.error(err);
+    }
+})();
+
 
 function generateAuthToken() {
     let authToken = crypto.randomBytes(16).toString('hex')
