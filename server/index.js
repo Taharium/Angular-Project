@@ -15,7 +15,7 @@ let users = [
 app.use(cors({ origin: 'http://localhost:4200' }));
 app.use(bodyParser.json());
 
-
+//ich hab kein mongodb, weil docker desktop nicht funktioniert
 (async function () {
     try {
             mongoose.connect('mongodb://localhost:27017/highscore', {
@@ -27,7 +27,6 @@ app.use(bodyParser.json());
         console.error(err);
     }
 })();
-
 
 function generateAuthToken() {
     let authToken = crypto.randomBytes(16).toString('hex')
